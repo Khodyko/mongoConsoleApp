@@ -1,7 +1,6 @@
 package org.example.web.controller;
 
 import org.example.web.dao.TaskDao;
-import org.example.web.dao.impl.TaskDaoImpl;
 import org.example.web.entity.SubTask;
 import org.example.web.entity.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +10,17 @@ import java.util.List;
 
 @Component
 public class ControllerImpl implements Controller {
-    TaskDao taskDaoImpl;
+    private TaskDao taskDaoImpl;
+
+    public ControllerImpl() {
+    }
 
     @Autowired
     public ControllerImpl(TaskDao taskDaoImpl) {
         this.taskDaoImpl = taskDaoImpl;
     }
 
+    @Override
     public List<Task> findAllTasks() {
         return taskDaoImpl.findAllTasks();
     }

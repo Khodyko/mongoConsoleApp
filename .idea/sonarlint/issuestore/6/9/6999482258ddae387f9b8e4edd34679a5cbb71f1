@@ -1,15 +1,27 @@
 
-S	java:S106"9Replace this use of System.out or System.err by a logger.(øºÑûúÿÿÿÿ
+S	java:S106("9Replace this use of System.out or System.err by a logger.(øºÑûúÿÿÿÿ
+K
+java:S2209."5Change this instance-reference to a static reference.(Û¤·ò
 D
-java:S1172)".Remove this unused method parameter "message".(–Ë½­
-S	java:S106F"9Replace this use of System.out or System.err by a logger.(øºÑûúÿÿÿÿ
-S	java:S106T"9Replace this use of System.out or System.err by a logger.(øºÑûúÿÿÿÿ
-M	java:S106o"9Replace this use of System.out or System.err by a logger.(¹ Œt
-{
-java:S1192%"eDefine a constant instead of duplicating this literal "ĞÑˆĞ¸Ğ±ĞºĞ° Ğ²Ğ²Ğ¾Ğ´Ğ°/Ğ²Ñ‹Ğ²Ğ¾Ğ´Ğ°" 4 times.(—¼­
+java:S11722".Remove this unused method parameter "message".(–Ë½­
+K
+java:S2209:"5Change this instance-reference to a static reference.(Û¤·ò
+P
+java:S2209B"5Change this instance-reference to a static reference.(æ€¤üÿÿÿÿ
+P
+java:S2209C"5Change this instance-reference to a static reference.(’½±Óøÿÿÿÿ
+S	java:S106N"9Replace this use of System.out or System.err by a logger.(øºÑûúÿÿÿÿ
+K
+java:S2209U"5Change this instance-reference to a static reference.(Û¤·ò
+S	java:S106\"9Replace this use of System.out or System.err by a logger.(øºÑûúÿÿÿÿ
+K
+java:S2209g"5Change this instance-reference to a static reference.(Û¤·ò
+M	java:S106u"9Replace this use of System.out or System.err by a logger.(¹ Œt
+c
+java:S1192."MDefine a constant instead of duplicating this literal "mes.error.io" 4 times.(Û¤·ò
 q
-java:S1488/"[Immediately return this expression instead of assigning it to the temporary variable "num".(øû
+java:S14887"[Immediately return this expression instead of assigning it to the temporary variable "num".(øû
 r
-java:S1488J"\Immediately return this expression instead of assigning it to the temporary variable "date".(ˆ¤ÏÖ
+java:S1488R"\Immediately return this expression instead of assigning it to the temporary variable "date".(ˆ¤ÏÖ
 @
-java:S5411q"*Use the primitive boolean expression here.(Ûüì‰
+java:S5411w"*Use the primitive boolean expression here.(¾ş ç

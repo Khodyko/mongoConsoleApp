@@ -14,17 +14,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Mongo Repository
+ */
 @Repository
 public class TaskDaoImpl implements TaskDao {
     private MongoTemplate template;
 
-
     @Autowired
     public TaskDaoImpl(MongoTemplate template) {
         this.template = template;
-
     }
-
 
     public TaskDaoImpl() {
     }
@@ -34,9 +34,9 @@ public class TaskDaoImpl implements TaskDao {
         return template.findAll(Task.class);
     }
 
-    public List<Task> findOverdueTasks(){
-        Query query=new Query();
-        Date date=new Date(System.currentTimeMillis());
+    public List<Task> findOverdueTasks() {
+        Query query = new Query();
+        Date date = new Date(System.currentTimeMillis());
         query.addCriteria(Criteria.where("deadline").lt(date));
         return template.find(query, Task.class);
     }
@@ -50,14 +50,16 @@ public class TaskDaoImpl implements TaskDao {
     @Override
     public List<Task> findTasksByPartOfName(String partOfName) {
         Query query = new Query();
-        query.addCriteria(Criteria.where("_id").regex(".*" + partOfName + ".*", "i"));
+        query.addCriteria(Criteria.where("_id")
+                                    .regex(".*" + partOfName + ".*", "i"));
         return template.find(query, Task.class);
     }
 
     @Override
     public List<Task> findTasksByPartOfDescription(String partOfDescription) {
         Query query = new Query();
-        query.addCriteria(Criteria.where("description").regex(".*" + partOfDescription + ".*", "i"));
+        query.addCriteria(Criteria.where("description")
+                                    .regex(".*" + partOfDescription + ".*", "i"));
         return template.find(query, Task.class);
     }
 
@@ -78,7 +80,7 @@ public class TaskDaoImpl implements TaskDao {
         Query query = new Query();
         query.addCriteria(Criteria.where("name").is(name));
         Task task = template.findById(name, Task.class);
-        List<SubTask> subTaskList=new ArrayList<>();
+        List<SubTask> subTaskList = new ArrayList<>();
         subTaskList.addAll(task.getSubTaskList());
         return subTaskList;
     }
@@ -90,7 +92,7 @@ public class TaskDaoImpl implements TaskDao {
 
     @Override
     public void deleteTaskByName(String name) {
-        Query query=new Query();
+        Query query = new Query();
         query.addCriteria(Criteria.where("name").is(name));
         template.remove(query, Task.class);
     }

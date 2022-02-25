@@ -20,5 +20,4 @@ public class Validator {
             throw new ReaderException("Ввод не является числом", e);
         }
     }
-
 }

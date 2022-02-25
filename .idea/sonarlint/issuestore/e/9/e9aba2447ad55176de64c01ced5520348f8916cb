@@ -1,7 +1,7 @@
 
 g
-java:S1192e"LDefine a constant instead of duplicating this literal "subTaskList" 3 times.(·ïäøùÿÿÿÿ
+java:S1192g"LDefine a constant instead of duplicating this literal "subTaskList" 3 times.(·ïäøùÿÿÿÿ
 f
-java:S1192g"KDefine a constant instead of duplicating this literal "taskEntity" 3 times.(ÃúÂÃøÿÿÿÿ
+java:S1192i"KDefine a constant instead of duplicating this literal "taskEntity" 3 times.(ÃúÂÃøÿÿÿÿ
 X
-java:S2259R"BA "NullPointerException" could be thrown; "task" is nullable here.(í£‘İ
+java:S2259T"BA "NullPointerException" could be thrown; "task" is nullable here.(í£‘İ

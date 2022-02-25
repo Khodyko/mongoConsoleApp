@@ -6,6 +6,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Collection subTask is not realised
+ */
 @Document(collection = "subTask")
 public class SubTask implements Serializable {
     private static final long serialVersionUID = 1L;

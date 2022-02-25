@@ -5,6 +5,10 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 
 import java.util.Locale;
 
+/**
+ * Return property messages.
+ * Used only ru locale now.
+ */
 public class MessageBundle {
     private static ResourceBundleMessageSource messageSource;
 

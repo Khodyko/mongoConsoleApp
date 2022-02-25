@@ -10,6 +10,15 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ *
+ * This class presents menu.
+ * Runs operations of Menu in infinity cycle.
+ * Gets input from Reader.
+ * Gets info from Controller.
+ * @see Reader
+ * @see Controller
+ */
 @Component
 public class ViewPresenter {
     private MessageBundle bundle;
@@ -139,15 +148,15 @@ public class ViewPresenter {
                 }
             }
         } catch (ReaderException e) {
-            System.err.println("Ошибка!");
+            System.err.println(bundle.getStr("mes.error"));
 //            e.printStackTrace();
             System.err.println(e.getMessage());
-            System.out.println("Повторный запуск");
+            System.out.println(bundle.getStr("mes.repeat.start"));
         } catch (Exception e) {
-            System.err.println("Ошибка!");
+            System.err.println(bundle.getStr("mes.error"));
             //            e.printStackTrace();
             System.err.println("Непредвиденная ошибка");
-            System.out.println("Повторный запуск");
+            System.out.println(bundle.getStr("mes.repeat.start"));
         }
     }
 }

@@ -11,7 +11,7 @@ public class Runner {
 
     public static void main(String[] args) {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-        ViewPresenter menuView=ctx.getBean(ViewPresenter.class);
+        ViewPresenter menuView = ctx.getBean(ViewPresenter.class);
         menuView.showMainPage();
     }
 }

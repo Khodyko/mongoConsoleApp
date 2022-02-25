@@ -23,7 +23,8 @@ public class Task implements Serializable {
     public Task() {
     }
 
-    public Task(Date dateOfCreation, Date deadline, String name, String description, List<SubTask> subTaskList) {
+    public Task(Date dateOfCreation, Date deadline, String name,
+                String description, List<SubTask> subTaskList) {
         this.dateOfCreation = dateOfCreation;
         this.deadline = deadline;
         this.name = name;
@@ -76,12 +77,17 @@ public class Task implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Task)) return false;
         Task task = (Task) o;
-        return Objects.equals(dateOfCreation, task.dateOfCreation) && Objects.equals(deadline, task.deadline) && Objects.equals(name, task.name) && Objects.equals(description, task.description) && Objects.equals(subTaskList, task.subTaskList);
+        return Objects.equals(dateOfCreation, task.dateOfCreation)
+                    && Objects.equals(deadline, task.deadline)
+                    && Objects.equals(name, task.name)
+                    && Objects.equals(description, task.description)
+                    && Objects.equals(subTaskList, task.subTaskList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dateOfCreation, deadline, name, description, subTaskList);
+        return Objects.hash(dateOfCreation, deadline,
+                            name, description, subTaskList);
     }
 
     @Override
