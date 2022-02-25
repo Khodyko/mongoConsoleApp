@@ -4,7 +4,6 @@ import org.example.web.dao.TaskDao;
 import org.example.web.entity.SubTask;
 import org.example.web.entity.Task;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -12,6 +11,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -32,6 +32,13 @@ public class TaskDaoImpl implements TaskDao {
     @Override
     public List<Task> findAllTasks() {
         return template.findAll(Task.class);
+    }
+
+    public List<Task> findOverdueTasks(){
+        Query query=new Query();
+        Date date=new Date(System.currentTimeMillis());
+        query.addCriteria(Criteria.where("deadline").lt(date));
+        return template.find(query, Task.class);
     }
 
     @Override
@@ -71,7 +78,9 @@ public class TaskDaoImpl implements TaskDao {
         Query query = new Query();
         query.addCriteria(Criteria.where("name").is(name));
         Task task = template.findById(name, Task.class);
-        return task.getSubTaskList();
+        List<SubTask> subTaskList=new ArrayList<>();
+        subTaskList.addAll(task.getSubTaskList());
+        return subTaskList;
     }
 
     @Override
@@ -80,8 +89,10 @@ public class TaskDaoImpl implements TaskDao {
     }
 
     @Override
-    public void delete(Task task) {
-        template.remove(task);
+    public void deleteTaskByName(String name) {
+        Query query=new Query();
+        query.addCriteria(Criteria.where("name").is(name));
+        template.remove(query, Task.class);
     }
 
     @Override

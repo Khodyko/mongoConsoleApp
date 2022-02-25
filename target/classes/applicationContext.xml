@@ -6,6 +6,19 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/data/mongo https://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
     <context:annotation-config/>
+
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="useCodeAsDefaultMessage" value="false"/>
+        <property name="basename" value="property.message"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="cacheSeconds" value="-1"/>
+    </bean>
+
+<bean name="messageBundle" class="org.example.web.MessageBundle">
+    <constructor-arg name="messageSource" ref="messageSource"/>
+</bean>
+
+
     <!--    mongo-->
     <!--        <mongo:mongo-client host="localhost" port="27017" id="mongoClient"/>-->
     <mongo:mongo-client id="replicaSetMongo"
@@ -22,6 +35,8 @@
         <constructor-arg ref="mongoTemplate"/>
     </bean>
     <bean id="menuView" class="org.example.web.view.ViewPresenter">
+        <constructor-arg ref="messageBundle" name="bundle"/>
+        <property ref="menuView" name="viewPresenter"/>
         <constructor-arg ref="controllerImpl"/>
         <constructor-arg ref="viewReader"/>
     </bean>
@@ -29,5 +44,9 @@
 <bean name="controllerImpl" class="org.example.web.controller.ControllerImpl">
     <constructor-arg name="taskDaoImpl"  ref="taskDaoImpl"/>
 </bean>
-<bean name="viewReader" class="org.example.web.view.ViewReader"/>
+    <bean name="viewReader" class="org.example.web.view.Reader">
+        <constructor-arg name="validator" ref="validator"/>
+    </bean>
+
+    <bean name="validator" class="org.example.web.view.Validator"/>
 </beans>

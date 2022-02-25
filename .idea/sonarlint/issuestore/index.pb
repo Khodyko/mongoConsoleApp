@@ -1,3 +1,27 @@
 
 a
 1src/main/java/org/example/web/entity/SubTask.java,a\7\a77dd1cbad3767e3dad1b64b6f213b68f59ca928
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+Y
+)src/main/java/org/example/web/Runner.java,c\4\c4c5e8625a465efb609fd2a3ea2927c71fd200c7
+`
+0src/main/java/org/example/web/MessageBundle.java,f\9\f9738d9276687dea1a2bb09a5be5c888c20d95a2
+^
+.src/main/java/org/example/web/dao/TaskDao.java,1\a\1a1238b72475cc77a3355003606b1181bc936b23
+h
+8src/main/java/org/example/web/controller/Controller.java,e\1\e1cbbfebe1038e172056fd1ebeedf1fb32153fd9
+^
+.src/main/java/org/example/web/entity/Task.java,1\1\11b538dcd5e13449d0de8ef7a330fd3db57c5247
+l
+<src/main/java/org/example/web/controller/ControllerImpl.java,b\9\b9d2bd83fb35d77bbc6b580585348c57bd1f2faa
+^
+.src/main/java/org/example/web/view/Reader.java,6\9\6999482258ddae387f9b8e4edd34679a5cbb71f1
+l
+<src/main/java/org/example/web/exception/ReaderException.java,d\c\dc7bedd2a3486b6e8ead63c07bb50ecb85de27f1
+e
+5src/main/java/org/example/web/view/ViewPresenter.java,7\7\77a9360b6918df3446282fb7210158b8f36bb10d
+a
+1src/main/java/org/example/web/view/Validator.java,f\8\f8750101b48c753584f809b75ca59ac5e350ba50
+g
+7src/main/java/org/example/web/dao/impl/TaskDaoImpl.java,e\9\e9aba2447ad55176de64c01ced5520348f8916cb

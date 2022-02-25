@@ -23,6 +23,11 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
+    public List<Task> findOverdueTasks() {
+        return taskDaoImpl.findOverdueTasks();
+    }
+
+    @Override
     public Task insert(Task task) {
         return taskDaoImpl.insert(task);
     }
@@ -58,8 +63,8 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public void delete(Task task) {
-        taskDaoImpl.delete(task);
+    public void deleteTaskByName(String name) {
+        taskDaoImpl.deleteTaskByName(name);
     }
 
     @Override

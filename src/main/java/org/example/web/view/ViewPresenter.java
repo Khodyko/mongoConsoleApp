@@ -1,21 +1,33 @@
 package org.example.web.view;
 
+import org.example.web.MessageBundle;
 import org.example.web.controller.Controller;
 import org.example.web.entity.SubTask;
 import org.example.web.entity.Task;
+import org.example.web.exception.ReaderException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Component
 public class ViewPresenter {
+    private MessageBundle bundle;
+    private ViewPresenter viewPresenter;
+    private Controller controllerImpl;
+    private Reader viewReader;
 
-    Controller controllerImpl;
-    ViewReader viewReader;
+    public ViewPresenter getViewPresenter() {
+        return viewPresenter;
+    }
 
-    public ViewPresenter(Controller controllerImpl, ViewReader viewReader) {
+    @Autowired
+    public void setViewPresenter(ViewPresenter viewPresenter) {
+        this.viewPresenter = viewPresenter;
+    }
+
+    public ViewPresenter(MessageBundle bundle, Controller controllerImpl, Reader viewReader) {
+        this.bundle = bundle;
         this.controllerImpl = controllerImpl;
         this.viewReader = viewReader;
     }
@@ -24,106 +36,118 @@ public class ViewPresenter {
     }
 
     public void showMainPage() {
-        System.out.println("Список возможных операций");
-        System.out.println("1. Показать список всех заданий");
-        System.out.println("2. Найти задание по имени задания");
-        System.out.println("3. Найти задание по части имени задания");
-        System.out.println("4. Найти задание по описанию задания");
-        System.out.println("5. Найти задание по части описания задания");
-        System.out.println("6. Найти все подзадание по имени задания");
-        System.out.println("7. Создать новое задание");
-        System.out.println("8. Изменить задание");
-        System.out.println("9. Удалить задание");
-        System.out.println("10. Добавить подзадание в задание");
-        System.out.println("11. Изменить список подзаданий в задании");
-        System.out.println("12. Удалить список подзаданий в задании");
-        System.out.println("13. Выйти");
-        executeOperation();
+        while (true) {
+            System.out.println(bundle.getStr("mes.view.menu.title"));
+            System.out.println(bundle.getStr("mes.view.menu.operation.1"));
+            System.out.println(bundle.getStr("mes.view.menu.operation.2"));
+            System.out.println(bundle.getStr("mes.view.menu.operation.3"));
+            System.out.println(bundle.getStr("mes.view.menu.operation.4"));
+            System.out.println(bundle.getStr("mes.view.menu.operation.5"));
+            System.out.println(bundle.getStr("mes.view.menu.operation.6"));
+            System.out.println(bundle.getStr("mes.view.menu.operation.7"));
+            System.out.println(bundle.getStr("mes.view.menu.operation.8"));
+            System.out.println(bundle.getStr("mes.view.menu.operation.9"));
+            System.out.println(bundle.getStr("mes.view.menu.operation.10"));
+            System.out.println(bundle.getStr("mes.view.menu.operation.11"));
+            System.out.println(bundle.getStr("mes.view.menu.operation.12"));
+            System.out.println(bundle.getStr("mes.view.menu.operation.13"));
+            System.out.println(bundle.getStr("mes.view.menu.operation.14"));
+            executeOperation();
+        }
     }
 
     public void executeOperation() {
-
-        Integer num = viewReader.getMenuOperationNum("Введите номер требуемой операции(без точки)");
-        switch (num) {
-            case 1: {
-                System.out.println("Список всех заданий");
-                System.out.println(controllerImpl.findAllTasks());
-                break;
-            }
-            case 2: {
-                String name = viewReader.getString("Введите имя задания");
-                System.out.println("Задание с именем " + name);
-                System.out.println(controllerImpl.findTaskByName(name));
-                break;
-            }
-            case 3: {
-                String partOfName = viewReader.getString("Введите часть имени задания");
-                System.out.println(controllerImpl.findTasksByPartOfName(partOfName));
-                break;
-            }
-            case 4: {
-                String description = viewReader.getString("Введите описание задания");
-                System.out.println(controllerImpl.findAllTasksByDescription(description));
-                break;
-            }
-            case 5: {
-                String descriptionPart = viewReader.getString("Введите часть описания задания");
-                System.out.println(controllerImpl.findAllTasksByDescription(descriptionPart));
-                break;
-            }
-            case 6: {
-                String name = viewReader.getString("Введите имя задания");
-                System.out.println(controllerImpl.findAllSubTasksByTaskName(name));
-                break;
-            }
-            case 7: {
-                Task task = viewReader.getTask();
-                System.out.println(controllerImpl.insert(task));
-                break;
-            }
-            case 8: {
-                Task task = viewReader.getTask();
-                controllerImpl.save(task);
-                break;
-            }
-            case 9: {
-                Task task = viewReader.getTask();
-                controllerImpl.delete(task);
-                break;
-            }
-            case 10: {
-                String name = viewReader.getString("Введите название задачи");
-                SubTask subTask = viewReader.getSubTask();
-                controllerImpl.addSubTask(name, subTask);
-                break;
-            }
-            case 11: {
-                String name = viewReader.getString("Введите название задачи");
-                List<SubTask> subTaskList = viewReader.getSubTaskList();
-                controllerImpl.updateSubTasks(name, subTaskList);
-            }
-            case 12: {
-                //вынести строки в проперти или в final
-                String name = viewReader.getString("Введите название задачи");
-                controllerImpl.deleteSubTasks(name);
-            }
-//Дописать
-            case 13: {
-                try {
-                    viewReader.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
+        try {
+            Integer num = viewReader.getMenuOperationNum(bundle.getStr("mes.view.ask.input.operation"));
+            switch (num) {
+                case 1: {
+                    System.out.println(bundle.getStr("mes.view.tasklist"));
+                    System.out.println(controllerImpl.findAllTasks());
+                    break;
+                }
+                case 2: {
+                    String name = viewReader.getString(bundle.getStr("mes.view.ask.input.task.name"));
+                    System.out.println("Задание с именем " + name);
+                    System.out.println(controllerImpl.findTaskByName(name));
+                    break;
+                }
+                case 3: {
+                    String partOfName = viewReader.getString(bundle.getStr("mes.view.ask.input.part.task.name"));
+                    System.out.println(controllerImpl.findTasksByPartOfName(partOfName));
+                    break;
+                }
+                case 4: {
+                    String description = viewReader.getString(bundle.getStr("mes.view.ask.input.task.description"));
+                    System.out.println(controllerImpl.findAllTasksByDescription(description));
+                    break;
+                }
+                case 5: {
+                    String descriptionPart = viewReader.getString(bundle.getStr("mes.view.ask.input.part.task.description"));
+                    System.out.println(controllerImpl.findTasksByPartOfDescription(descriptionPart));
+                    break;
+                }
+                case 6: {
+                    String name = viewReader.getString(bundle.getStr("mes.view.ask.input.task.name"));
+                    System.out.println(controllerImpl.findAllSubTasksByTaskName(name));
+                    break;
+                }
+                case 7: {
+                    Task task = viewReader.getTask();
+                    System.out.println(controllerImpl.insert(task));
+                    break;
+                }
+                case 8: {
+                    Task task = viewReader.getTask();
+                    controllerImpl.save(task);
+                    break;
+                }
+                case 9: {
+                    String name = viewReader.getString(bundle.getStr("mes.view.ask.input.task.name"));
+                    controllerImpl.deleteTaskByName(name);
+                    break;
+                }
+                case 10: {
+                    String name = viewReader.getString(bundle.getStr("mes.view.ask.input.task.name"));
+                    SubTask subTask = viewReader.getSubTask();
+                    controllerImpl.addSubTask(name, subTask);
+                    break;
+                }
+                case 11: {
+                    String name = viewReader.getString(bundle.getStr("mes.view.ask.input.task.name"));
+                    List<SubTask> subTaskList = viewReader.getSubTaskList();
+                    controllerImpl.updateSubTasks(name, subTaskList);
+                    break;
+                }
+                case 12: {
+                    String name = viewReader.getString(bundle.getStr("mes.view.ask.input.task.name"));
+                    controllerImpl.deleteSubTasks(name);
+                    break;
+                }
+                case 13: {
+                    System.out.println(controllerImpl.findOverdueTasks());
+                    break;
+                }
+                case 14: {
+                    try {
+                        viewReader.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        System.exit(0);
+                    }
+                    break;
                 }
             }
-            default: {
-                try {
-                    viewReader.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+        } catch (ReaderException e) {
+            System.err.println("Ошибка!");
+//            e.printStackTrace();
+            System.err.println(e.getMessage());
+            System.out.println("Повторный запуск");
+        } catch (Exception e) {
+            System.err.println("Ошибка!");
+            //            e.printStackTrace();
+            System.err.println("Непредвиденная ошибка");
+            System.out.println("Повторный запуск");
         }
-
     }
-
 }
